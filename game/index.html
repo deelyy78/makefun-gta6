@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solano Heat — an original open-world crime game</title>
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #17222e; }
+  #game { display: block; width: 100vw; height: 100vh; }
+  .overlay {
+    position: fixed; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 14px;
+    font-family: system-ui, 'Segoe UI', sans-serif; color: #f7ecd2;
+    background: linear-gradient(180deg, rgba(23,26,44,0.42), rgba(23,26,44,0.08) 40%, rgba(23,26,44,0.5));
+    z-index: 5;
+  }
+  .hidden { display: none !important; }
+  h1.title {
+    margin: 0; font-size: clamp(44px, 9vw, 92px); font-weight: 900; letter-spacing: 0.06em;
+    color: #ffc53d; text-shadow: 0 3px 0 #c2452d, 0 10px 34px rgba(0,0,0,0.55);
+  }
+  .tagline { margin: -6px 0 8px; font-size: clamp(14px, 2.2vw, 19px); color: #ffe9b8; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+  .btn {
+    min-width: 250px; padding: 12px 22px; font-size: 17px; font-weight: 700; letter-spacing: 0.04em;
+    color: #20242c; background: #ffc53d; border: none; border-radius: 9px; cursor: pointer;
+    box-shadow: 0 4px 0 #b57f16, 0 8px 22px rgba(0,0,0,0.4);
+  }
+  .btn:hover { background: #ffd35e; }
+  .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #b57f16; }
+  .btn.secondary { background: #2ec4b6; box-shadow: 0 4px 0 #177d72, 0 8px 22px rgba(0,0,0,0.4); }
+  .panel {
+    max-width: 520px; padding: 16px 22px; border-radius: 12px;
+    background: rgba(16,20,28,0.82); border: 1px solid rgba(255,255,255,0.16);
+    font-size: 15px; line-height: 1.65;
+  }
+  .panel b { color: #ffc53d; }
+  .foot { position: absolute; bottom: 16px; font-size: 12.5px; color: rgba(255,240,210,0.85); text-shadow: 0 1px 6px rgba(0,0,0,0.8); }
+  h2.big { margin: 0; font-size: 40px; font-weight: 900; letter-spacing: 0.08em; color: #fff; text-shadow: 0 4px 18px rgba(0,0,0,0.6); }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="menu" class="overlay">
+  <h1 class="title">SOLANO HEAT</h1>
+  <p class="tagline">Port Solano. One courier, six jobs, and every cop in the city.</p>
+  <button class="btn" id="btn-new">NEW GAME</button>
+  <button class="btn secondary hidden" id="btn-continue">CONTINUE</button>
+  <button class="btn secondary" id="btn-how">HOW TO PLAY</button>
+  <div class="panel hidden" id="how-panel">
+    <b>Drive &amp; walk:</b> WASD / arrows · <b>Aim:</b> mouse · <b>Shoot:</b> click<br>
+    <b>E:</b> enter or steal a car, talk, use · <b>Shift:</b> sprint / handbrake<br>
+    <b>Space:</b> brake · <b>F:</b> shove · <b>1/2/3:</b> fist, pistol, SMG<br>
+    <b>P / Esc:</b> pause · <b>M:</b> mute<br>
+    Work Marisol Vega's jobs from the gold marker, run taxi fares, win the
+    Coast Run, find 20 hidden cash stashes — and shake the PSPD when the
+    stars climb: break line of sight and let the heat die down.
+  </div>
+  <div class="foot">An original open-world crime game — city, story, art and sound made for this entry. Nothing here is from any other game.</div>
+</div>
+
+<div id="pause" class="overlay hidden">
+  <h2 class="big">PAUSED</h2>
+  <div class="panel" id="pause-stats"></div>
+  <button class="btn" id="btn-resume">RESUME</button>
+  <button class="btn secondary" id="btn-quit">QUIT TO TITLE</button>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
